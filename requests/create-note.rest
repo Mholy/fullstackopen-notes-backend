@@ -24,3 +24,14 @@ Content-Type: application/json
 {
     "content": "importance is not required"
 }
+
+###
+
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+    "content": "user id sent second time",
+    "important": true,
+    "userId": "5db2a307c249b91c9016aa5c"
+}
