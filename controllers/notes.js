@@ -3,8 +3,8 @@ const Note = require('../models/note')
 const User = require('../models/user')
 
 notesRouter.get('/', async (request, response) => {
-    const notes = await Note.find({})
-    response.json(notes.map(note => note.toJSON()))
+    const notes = await Note.find({}).populate('user', { username: 1, name: 1 })
+    response.json(notes.map((note) => note.toJSON()))
 })
 
 notesRouter.get('/:id', async (request, response, next) => {
@@ -60,10 +60,10 @@ notesRouter.put('/:id', (request, response, next) => {
     }
 
     Note.findByIdAndUpdate(request.params.id, note, { new: true })
-        .then(updatedNote => {
+        .then((updatedNote) => {
             response.json(updatedNote.toJSON())
         })
-        .catch(error => next(error))
+        .catch((error) => next(error))
 })
 
 module.exports = notesRouter
